@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        .title {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            font-family: 'Open Sans', calibri;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .buttons {
+            margin: 20px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .buttons a {
+            background: #eee;
+            color: #555;
+            margin: 0 2px;
+            padding: 12px 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 2px;
+            font-size: 12px;
+            font-family: 'Open Sans', calibri;
+        }
+        .output {
+            margin: auto;
+            background: #eee;
+            border-radius: 5px;
+            height: 200px;
+            max-width: 600px;
+            padding: 30px 40px 30px 60px;
+        }
+    </style>
+</head>
+<title> Basic API Explorer </title>
+<body>
+
+<p class="title"> Basic API Explorer </p>
+<div class="buttons">
+    <a href="/action-1" id="action-1">Get Object</a>
+    <a href="/action-2" id="action-2">Pouplate object</a>
+</div>
+
+<div class="output">
+    <pre></pre>
+</div>
+
+<div class="error">
+    <pre></pre>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script>
+const linkButton = id => {
+    console.log(id);
+    document.querySelector(`#${id}`).addEventListener('click', event => {
+        event.preventDefault();
+        axios.get(id)
+            .then(res => {
+                if (typeof res.data !== 'undefined')  {
+                    let output = document.querySelector('.output pre');
+                    output.innerHTML = '';
+                    output.appendChild(document.createTextNode(JSON.stringify(res.data, undefined, 2)));
+                }
+            }).catch(response => {
+                document.querySelector('.error pre').appendChild(document.createTextNode('There was an error retrieving data'));
+            });
+    });
+};
+
+let nodes = document.querySelector('.buttons').getElementsByTagName('a');
+Array.from(nodes).forEach(node => linkButton(node.id))
+
+</script>
+</html>

@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8081:80"
+    volumes:
+      - ./api/src:/app/src
+    hostname: api
+    networks:
+      - mynet
+
+  client:
+    build:
+      context: ./client
+    ports:
+      - "8080:80"
+    volumes:
+      - ./client/src:/app/src
+    depends_on:
+      - api
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge

@@ -1,0 +1,19 @@
+{
+    "name": "apiexplorer",
+    "version": "0.1.0",
+    "description": "Https API",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ./src/index.js",
+        "dev": "nodemon --watch ./src ./src/index.js"
+    },
+    "author": "Rob Fallaize",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.2"
+    }
+}
