@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.override.yml convert
+    kompose.version: 1.18.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: explorer-client
+  name: explorer-client
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: explorer-client
+    spec:
+      containers:
+      - env:
+        - name: API
+          value: http://explorer-api
+        image: 155651965374.dkr.ecr.eu-west-2.amazonaws.com/explorer-client:latest
+        name: explorer-client
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

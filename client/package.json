@@ -1,7 +1,7 @@
 {
-    "name": "apiexplorer",
+    "name": "explorer",
     "version": "0.1.0",
-    "description": "Https API",
+    "description": "Https API Explorer",
     "main": "index.js",
     "scripts": {
         "start": "node ./src/index.js",

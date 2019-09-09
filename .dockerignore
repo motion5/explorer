@@ -1,2 +1,6 @@
 npm-debug.log
 README.MD
+node_modules
+.idea
+.vscode
+.DS_Store

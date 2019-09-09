@@ -16,6 +16,6 @@ COPY /src/ /app/src
 COPY /node_modules /app/node_modules
 COPY /*.* /app/
 
-EXPOSE 80
+#EXPOSE 80
 CMD [ "npm", "start" ]
 

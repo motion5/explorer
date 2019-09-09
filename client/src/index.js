@@ -4,6 +4,9 @@ app = express();
 const port = 80;
 const axios = require('axios');
 const host = 'http://api';
+// const host = process.env.API || 'http://explorer-api';
+
+console.log("API", process.env.API);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -25,7 +28,7 @@ app.get('/action-2', (req, res) => {
             return res.json({ data })
         }).catch(response => {
             console.log('in catch', response);
-            return res.json({error: error});
+            return res.json({error: response});
         });
 });
 

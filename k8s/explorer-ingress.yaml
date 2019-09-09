@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: explorer-ui
+  annotations:
+    kubernetes.io/ingress.class: alb
+    # this should match the name of the cluster
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    # subnet ids will change each time, you can get using:
+    # aws ec2 describe-subnets --filters Name=tag:Name,Values=example_application | grep SubnetId | egrep -o "subnet[^\"]+" (where example_application is the name of the subnets you want to get ids for
+    alb.ingress.kubernetes.io/subnets: subnet-053353a0d4724821c,subnet-0acd291042777b512
+    alb.ingress.kubernetes.io/tags: Environment=Prod,Team=slate
+    alb.ingress.kubernetes.io/healthcheck-path: "/"
+    alb.ingress.kubernetes.io/success-codes: "200,404"
+    # enable SSL
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-2:155651965374:certificate/f6b33c33-b7ee-4d40-b17a-6f64d8df7bfb"
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-2016-08 # recommended for general use
+  labels:
+    app: explorer
+spec:
+  rules:
+    - host: explorer.slatetest.co.uk
+      http:
+        paths:
+          - backend:
+              serviceName: "explorer-client"
+              servicePort: 80
