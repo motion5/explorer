@@ -6,6 +6,7 @@ metadata:
     kompose.version: 1.18.0 ()
   creationTimestamp: null
   labels:
+    app: explorer
     io.kompose.service: explorer-client
   name: explorer-client
 spec:
@@ -15,6 +16,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
+        app: explorer
         io.kompose.service: explorer-client
     spec:
       containers:

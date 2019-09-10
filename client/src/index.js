@@ -3,16 +3,11 @@ const path = require('path');
 app = express();
 const port = 80;
 const axios = require('axios');
-const host = 'http://api';
-// const host = process.env.API || 'http://explorer-api';
-
-console.log("API", process.env.API);
+const host = process.env.API || 'http://explorer-api';
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
-    // res.send('Welcome to basic API');
 });
-
 app.get('/action-1', (req, res) => {
     return res.json({
         data: {

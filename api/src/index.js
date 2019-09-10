@@ -5,14 +5,11 @@ const port = 80;
 const axios = require('axios');
 
 app.get('/action-1', (req, res) => {
-    console.log('api hit');
+    console.log('action-1 hit');
     return res.json({
-        name: 'Rob Fallaize',
-        occupation: 'Full time hustler',
-        skillLevel: 100,
-        swag: 100,
-        wins: 13,
-        losses: 0
+      name: 'Slate Apps Test',
+      purpose: 'Provide a PoC to show inter-pod communication through exposed cluster services',
+      method: 'Client makes AJAX request to API running on explorer API service'
     })
 });
 
